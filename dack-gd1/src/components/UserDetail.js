@@ -16,6 +16,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Grid from "@material-ui/core/Grid";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
 const styles = theme => ({
   card: {
@@ -54,8 +55,9 @@ class UserDetail extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
-
+    const { classes, userDetail, following, follower } = this.props;
+    console.log(following);
+    console.log(follower);
     return (
       <Card className={classes.card}>
         <div style={{ height: 50, backgroundColor: "#3f51b5" }} />
@@ -70,22 +72,24 @@ class UserDetail extends React.Component {
               <MoreVertIcon />
             </IconButton>
           }
-          title="Vuong Hoang Long "
-          subheader="LongVH9"
+          title={userDetail.name}
+          subheader={userDetail.email}
         />
         <CardContent>
           <Grid container spacing={24}>
             <Grid item xs={5}>
-              <Typography component="h5" variant="subtitle1">
-                {" "}
-                Follower: 12{" "}
-              </Typography>
+              <Link to="/follower" style={{ textDecoration: "none" }}>
+                <Typography component="h5" variant="subtitle1">
+                  {" "}
+                  Follower: {follower.length}
+                </Typography>
+              </Link>
             </Grid>
             <Grid item xs={6}>
               <Link to="/following" style={{ textDecoration: "none" }}>
                 <Typography component="h5" variant="subtitle1">
                   {" "}
-                  Following: 76{" "}
+                  Following: {following.length}
                 </Typography>
               </Link>
             </Grid>
@@ -109,12 +113,6 @@ class UserDetail extends React.Component {
             <ExpandMoreIcon />
           </IconButton>
         </CardActions>
-        {/* <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
-          <CardContent>
-            <Typography paragraph>User Detail:</Typography>
-            <Typography>Description</Typography>
-          </CardContent>
-        </Collapse> */}
       </Card>
     );
   }
@@ -123,5 +121,15 @@ class UserDetail extends React.Component {
 UserDetail.propTypes = {
   classes: PropTypes.object.isRequired
 };
+const mapStateToProps = state => {
+  return {
+    userDetail: state.userDetail,
+    following: state.following,
+    follower: state.follower
+  };
+};
 
-export default withStyles(styles)(UserDetail);
+export default connect(
+  mapStateToProps,
+  null
+)(withStyles(styles)(UserDetail));

@@ -16,6 +16,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Comment from "@material-ui/icons/Comment";
 import CardMedia from "@material-ui/core/CardMedia";
+import { connect } from "react-redux";
 
 const styles = theme => ({
   //   card: {
@@ -54,64 +55,68 @@ class Post extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
-
+    const { classes, listPost } = this.props;
+    console.log(listPost);
     return (
-      <Card className={classes.card}>
-        <CardHeader
-          avatar={
-            <Avatar aria-label="Recipe" className={classes.avatar}>
-              R
-            </Avatar>
-          }
-          action={
-            <IconButton>
-              <MoreVertIcon />
-            </IconButton>
-          }
-          title="Vuong Hoang Long "
-          subheader="LongVH9"
-        />
-        <CardContent>
-          <Typography component="h5" variant="subtitle1">
-            A function with a dispatch parameter. The function should return an
-            object that uses dispatch to bind action creators. Alternatively,
-            you can use the{" "}
-          </Typography>
-          <CardMedia
-            className={classes.media}
-            image="https://images.pexels.com/photos/1267257/pexels-photo-1267257.jpeg?cs=srgb&dl=alcoholic-beverages-bar-bartender-1267257.jpg&fm=jpg"
-            title="Paella dish"
-          />
-        </CardContent>
-        <CardActions className={classes.actions} disableActionSpacing>
-          <IconButton aria-label="Add to favorites">
-            <FavoriteIcon />
-          </IconButton>{" "}
-          <IconButton aria-label="Comment">
-            <Comment />
-          </IconButton>
-          <IconButton aria-label="Share">
-            <ShareIcon />
-          </IconButton>
-          <IconButton
-            className={classnames(classes.expand, {
-              [classes.expandOpen]: this.state.expanded
-            })}
-            onClick={this.handleExpandClick}
-            aria-expanded={this.state.expanded}
-            aria-label="Show more"
-          >
-            <ExpandMoreIcon />
-          </IconButton>
-        </CardActions>
-        {/* <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
+      <div>
+        {listPost.map((post, key) => {
+          return (
+            <Card className={classes.card} key={key} style={{ margin: 20 }}>
+              <CardHeader
+                avatar={
+                  <Avatar aria-label="Recipe" className={classes.avatar}>
+                    R
+                  </Avatar>
+                }
+                action={
+                  <IconButton>
+                    <MoreVertIcon />
+                  </IconButton>
+                }
+                title={post.user.name}
+                subheader={post.user.email}
+              />
+              <CardContent>
+                <Typography component="h5" variant="subtitle1">
+                  {post.description}
+                </Typography>
+                <CardMedia
+                  className={classes.media}
+                  image="https://images.pexels.com/photos/1267257/pexels-photo-1267257.jpeg?cs=srgb&dl=alcoholic-beverages-bar-bartender-1267257.jpg&fm=jpg"
+                  title="Paella dish"
+                />
+              </CardContent>
+              <CardActions className={classes.actions} disableActionSpacing>
+                <IconButton aria-label="Add to favorites">
+                  <FavoriteIcon />
+                </IconButton>{" "}
+                <IconButton aria-label="Comment">
+                  <Comment />
+                </IconButton>
+                <IconButton aria-label="Share">
+                  <ShareIcon />
+                </IconButton>
+                <IconButton
+                  className={classnames(classes.expand, {
+                    [classes.expandOpen]: this.state.expanded
+                  })}
+                  onClick={this.handleExpandClick}
+                  aria-expanded={this.state.expanded}
+                  aria-label="Show more"
+                >
+                  <ExpandMoreIcon />
+                </IconButton>
+              </CardActions>
+              {/* <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
           <CardContent>
             <Typography paragraph>User Detail:</Typography>
             <Typography>Description</Typography>
           </CardContent>
         </Collapse> */}
-      </Card>
+            </Card>
+          );
+        })}
+      </div>
     );
   }
 }
@@ -119,5 +124,16 @@ class Post extends React.Component {
 Post.propTypes = {
   classes: PropTypes.object.isRequired
 };
+const mapStateToProps = state => {
+  return {
+    userDetail: state.userDetail,
+    following: state.following,
+    follower: state.follower,
+    listPost: state.listPost
+  };
+};
 
-export default withStyles(styles)(Post);
+export default connect(
+  mapStateToProps,
+  null
+)(withStyles(styles)(Post));

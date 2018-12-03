@@ -5,17 +5,17 @@ import CardHeader from "@material-ui/core/CardHeader";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 
-class Following extends Component {
+class Follower extends Component {
   render() {
-    const { following } = this.props;
+    const { follower } = this.props;
     return (
       <div>
         <Paper style={{ padding: 20 }}>
           <Typography component="h5" variant="h5">
             {" "}
-            Following
+            Follower
           </Typography>
-          {following.map((item, key) => {
+          {follower.map((item, key) => {
             return (
               <CardHeader
                 key={key}
@@ -32,10 +32,10 @@ class Following extends Component {
 }
 const mapStateToProps = state => {
   return {
-    following: state.following
+    follower: state.follower
   };
 };
 export default connect(
   mapStateToProps,
   null
-)(Following);
+)(Follower);

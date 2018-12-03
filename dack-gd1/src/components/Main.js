@@ -9,6 +9,7 @@ import { Switch, Route } from "react-router-dom";
 import ListProduct from "./ListPost";
 import RightBar from "./RightBar";
 import Following from "./Following";
+import Follower from "./Follower";
 
 const styles = theme => ({
   root: {
@@ -36,7 +37,7 @@ class Main extends Component {
               <Route exact path="/" component={ListProduct} />
               {/* both /roster and /roster/:number begin with /roster */}
               <Route path="/following" component={Following} />
-              {/* <Route path="/follower" component={Follower} /> */}
+              <Route path="/follower" component={Follower} />
             </Switch>
           </Grid>
           <Grid item xs={3}>
