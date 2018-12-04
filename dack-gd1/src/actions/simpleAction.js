@@ -1,6 +1,7 @@
-export const simpleAction = () => dispatch => {
- dispatch({
-  type: 'SIMPLE_ACTION',
-  payload: 'result_of_simple_action'
- })
-}
+import { UPDATE_USER } from "./actionsType";
+export const updateUser = user => {
+  return {
+    type: UPDATE_USER,
+    payload: user
+  };
+};

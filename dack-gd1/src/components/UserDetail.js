@@ -17,6 +17,7 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Grid from "@material-ui/core/Grid";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import Button from "@material-ui/core/Button";
 
 const styles = theme => ({
   card: {
@@ -44,6 +45,9 @@ const styles = theme => ({
   },
   avatar: {
     backgroundColor: red[500]
+  },
+  button: {
+    margin: theme.spacing.unit
   }
 });
 
@@ -56,8 +60,7 @@ class UserDetail extends React.Component {
 
   render() {
     const { classes, userDetail, following, follower } = this.props;
-    console.log(following);
-    console.log(follower);
+    console.log(userDetail);
     return (
       <Card className={classes.card}>
         <div style={{ height: 50, backgroundColor: "#3f51b5" }} />
@@ -93,6 +96,15 @@ class UserDetail extends React.Component {
                 </Typography>
               </Link>
             </Grid>
+            <Link to="/updateUser" style={{ textDecoration: "none" }}>
+              <Button
+                variant="contained"
+                color="primary"
+                className={classes.button}
+              >
+                Update
+              </Button>
+            </Link>
           </Grid>
         </CardContent>
         <CardActions className={classes.actions} disableActionSpacing>
