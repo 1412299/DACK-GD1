@@ -17,6 +17,7 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Comment from "@material-ui/icons/Comment";
 import CardMedia from "@material-ui/core/CardMedia";
 import { connect } from "react-redux";
+import Collapse from "@material-ui/core/Collapse";
 
 const styles = theme => ({
   //   card: {
@@ -49,11 +50,9 @@ const styles = theme => ({
 
 class Post extends React.Component {
   state = { expanded: false };
-
   handleExpandClick = () => {
     this.setState(state => ({ expanded: !state.expanded }));
   };
-
   render() {
     const { classes, listPost } = this.props;
     console.log(listPost);
@@ -107,12 +106,17 @@ class Post extends React.Component {
                   <ExpandMoreIcon />
                 </IconButton>
               </CardActions>
-              {/* <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
-          <CardContent>
-            <Typography paragraph>User Detail:</Typography>
-            <Typography>Description</Typography>
-          </CardContent>
-        </Collapse> */}
+              <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
+                <CardContent>
+                  {post.comment.map((item, key) => {
+                    return (
+                      <Typography paragraph key={key}>
+                        <b>{item.user}</b>: {item.content}
+                      </Typography>
+                    );
+                  })}
+                </CardContent>
+              </Collapse>
             </Card>
           );
         })}

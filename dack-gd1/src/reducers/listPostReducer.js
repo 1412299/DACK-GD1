@@ -7,7 +7,19 @@ const initListPost = [
       name: "Nguyen Tien Dat",
       email: "DatNT76",
       imageURL: "/url/image2"
-    }
+    },
+    comment: [
+      {
+        id: 1,
+        content: "comment 1",
+        user: "dat"
+      },
+      {
+        id: 2,
+        content: "comment 2",
+        user: "dat"
+      }
+    ]
   },
 
   {
@@ -18,7 +30,19 @@ const initListPost = [
       name: "Nguyen Anh Khoa ",
       email: "KhoaNA11",
       imageURL: "/url/image4"
-    }
+    },
+    comment: [
+      {
+        id: 3,
+        content: "comment 3",
+        user: "long"
+      },
+      {
+        id: 4,
+        content: "comment 4",
+        user: "khanh"
+      }
+    ]
   },
 
   {
@@ -29,7 +53,19 @@ const initListPost = [
       name: "Vu Quoc Khanh ",
       email: "KhanhVQ3",
       imageURL: "/url/image3"
-    }
+    },
+    comment: [
+      {
+        id: 5,
+        content: "comment 5",
+        user: "huy"
+      },
+      {
+        id: 7,
+        content: "comment 7",
+        user: "minh"
+      }
+    ]
   }
 ];
 
